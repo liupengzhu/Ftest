@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="echarts.js"></script>
+
+</head>
+<body>
+<div id='box' style="width: 1500px;height:750px;"></div>
+<script>
+    //app.title = '堆叠柱状图';
+    // 基于准备好的dom，初始化echarts实例
+    var myChart = echarts.init(document.getElementById('box'));
+    var ratio = 'kwh';
+    var option = {
+        tooltip: {
+            trigger: 'axis',
+            axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+                type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+            },
+            formatter(params, ticket, callback) {
+                console.log(params);
+
+                var res = '<p style="margin-left: 20px;margin-bottom:0;margin-top:20px;font-size: 40px">时间：' + params[0].name + '</p>';
+                var total = 0;
+                for (var i = 0; i < params.length; i++) {
+                    res += '<p style="margin: 20px;font-size: 40px"><span style="color:' + params[i].color + '">' + params[i].seriesName + '</span><span>： ' + params[i].data + '</span></p>';
+                    total += params[i].data;
+                }
+                res += '<p style="margin: 20px;font-size: 40px ">' + '总量' + '： ' + total + '</p>';
+                return res;
+
+            }
+
+        },
+        legend: {
+            data: ['峰', '谷', '平', '视频广告', '搜索引擎', '百度', '谷歌', '必应', '其他'],
+            bottom: 0,
+            textStyle: {
+                fontSize: 25 // 让字体变大
+            }
+        },
+        grid: {
+            left: '3%',
+            right: '4%',
+            bottom: '10%',
+            containLabel: true
+        },
+        xAxis: [
+            {
+
+                axisLabel: { //调整x轴的lable
+                    textStyle: {
+                        fontSize: 25 // 让字体变大
+                    }
+                },
+                type: 'category',
+                data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日', '周二', '周三', '周四', '周五', '周六', '周日', '周二', '周三', '周四', '周五', '周六', '周日', '周二', '周三', '周四', '周五', '周六', '周日', '周二', '周三', '周四', '周五', '周六', '周日', '周二', '周三', '周四', '周五', '周六', '周日']
+                , axisTick: {
+                alignWithLabel: true
+            }
+                , max: 40
+                , min: 0,
+                interval: 10
+            }
+        ],
+        yAxis: [
+            {
+                type: 'value',
+                axisLabel: { //调整x轴的lable
+                    textStyle: {
+                        fontSize: 25 // 让字体变大
+                    },
+                    formatter: function (value) {
+
+                        return value + ratio;
+
+                    }
+
+                }
+            }
+        ],
+        color: ['#e43434', '#123456', '#dddddd'],
+        series: [
+            {
+                name: '峰',
+                type: 'bar',
+                stack: '广告',
+                data: [120, 132, 101, 134, 90, 230, 210, 132, 101, 134, 90, 230, 210, 132, 101, 134, 90, 230, 210, 132, 101, 134, 90, 230, 210, 132, 101, 134, 90, 230, 210, 132, 101, 134, 90, 230, 210],
+
+
+            },
+            {
+                name: '谷',
+                type: 'bar',
+                stack: '广告',
+                data: [220, 182, 191, 234, 290, 330, 310, 132, 101, 134, 90, 230, 210, 132, 101, 134, 90, 230, 210, 132, 101, 134, 90, 230, 210, 132, 101, 134, 90, 230, 210, 132, 101, 134, 90, 230, 210],
+
+            },
+            {
+                name: '平',
+                type: 'bar',
+                stack: '广告',
+                data: [150, 232, 201, 154, 190, 330, 410, 132, 101, 134, 90, 230, 210, 132, 101, 134, 90, 230, 210, 132, 101, 134, 90, 230, 210, 132, 101, 134, 90, 230, 210, 132, 101, 134, 90, 230, 210],
+
+            }
+        ]
+    };
+    // 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
+</script>
+</body>
+</html>

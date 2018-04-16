@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        h2{
+            text-align: right;
+            font-size: 30px;
+            line-height: 25px;
+            width: 1920px;
+        }
+    </style>
+</head>
+<h2>可编辑列表</h2>
+<ul contenteditable="true">
+    <li style="font-size: large">列表元素1</li>
+    <li style="background: chartreuse">列表元素2</li>
+    <li>列表元素3</li>
+    <li>列表元素4</li>
+    <li>列表元素5</li>
+</ul>
+
+<body>
+<div contextmenu="mymenu"
+hidden = "false">上下文菜单
+    <menu type="context" id="mymenu">
+        <menuitem label="微信分享"></menuitem>
+        <menuitem label="微博分享"></menuitem>
+    </menu>
+</div>
+<ul>
+    <li data-animal-type>猫头鹰</li>
+    <li data-animal-type>鲤鱼</li>
+    <li data-animal-type>蜘蛛</li>
+</ul>
+<script>
+    var lis = document.getElementsByTagNameNS("li");
+    for(var i =0;i<lis.length;i++){
+        console.log(lis[i].dataset.animalType);
+    }
+    document.write(lis.toString());
+</script>
+</body>
+</html>
+
+
+
+
